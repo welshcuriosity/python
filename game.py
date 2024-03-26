@@ -1,4 +1,5 @@
 import sys
+import time
 import os.path
 import random
 
@@ -51,6 +52,8 @@ else:
     if len(sys.argv) == 4 and sys.argv[3] == "debug":
         print(color.PURPLE + word + color.END)
 
+    start_time = time.time()
+
     while guesses < max_guesses and "*" in guessed_word:
         print("\n",color.YELLOW, "".join(guessed_word), color.END,"\n")
         print("You have ", color.BOLD, color.GREEN, max_guesses - guesses, color.END, " guesses remaining", sep='')
@@ -85,6 +88,8 @@ else:
                 guesses += 1
 
     if "*" in guessed_word:
-        print(color.RED, "\nHard Luck. The word you were looking for was ", color.UNDERLINE, word, color.END,"\n", sep='')
+        print(color.RED, "\nHard Luck. The word you were looking for was ", color.UNDERLINE, word, color.END, \
+              color.RED, ". What a waste of %.2f" % (time.time() - start_time), " seconds", color.END, "\n", sep='')
     else:
-        print(color.GREEN, "\nWell Done. You correctly guessed ", color.UNDERLINE, word, color.END,"\n", sep='')
+        print(color.GREEN, "\nWell Done. You correctly guessed ", color.UNDERLINE, color.BOLD, word, color.END, \
+              color.GREEN, " in %.2f" % (time.time() - start_time), " seconds", color.END, "\n", sep='')
